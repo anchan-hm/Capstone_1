@@ -55,10 +55,10 @@ AS combined; -- combining them into one output
 
 /* QUESTION 2: What is the month by month revenue breakdown for the sales territory? */
 -- creating month by month sales
-SELECT YEAR(Sale_Date) AS Year,  -- the year for sale
-		MONTH(Sale_Date) AS Month,  -- month for sale
+SELECT YEAR(Sale_Date) AS Year,  -- making year for sale
+		MONTH(Sale_Date) AS Month,  -- making month for sale
         SUM(Revenue) AS Total_Revenue  -- adding the total revenue 
-FROM (SELECT ss.Transaction_Date AS Sale_Date, -- creating subquery, grabbing in store sales
+FROM (SELECT ss.Transaction_Date AS Sale_Date, -- renaming and grabbing in store sales
 		ss.Sale_Amount AS revenue   -- having the amount of revenue of each sale
 FROM store_sales AS ss
 JOIN store_locations AS sl
@@ -72,6 +72,7 @@ WHERE o.ShiptoState = 'Texas')  -- making sure it is Texas
 AS all_sales
 GROUP BY YEAR(Sale_Date), MONTH(Sale_Date) -- grouping years and months
 ORDER BY Year, Month;    -- sorting from oldest to newest
+/* 130 RECORDS Returned */
 
 /* QUESTION 3: Provide a comparison of total revenue for the specific sales territory
 and the region it belongs to. */
@@ -118,5 +119,47 @@ AS combined -- combine into one table
 GROUP BY Location;
 /* Texas = 8209129.35, South = 15641639.89 */
 
-/* QUESTION 4: What is the number of transactions per month and average transaction size by product category
-for the sales territory? */
+/* QUESTION 4: What is the number of transactions per month and average transaction
+size by product category for the sales territory? */
+-- finding the average sale amount for Texas
+SELECT YEAR(Sale_Date) AS Year,  -- creating year of sale
+		MONTH (Sale_Date) AS Month,  -- creating month of sale
+        Category,     -- category of product
+        COUNT(*) AS Number_of_Transactions,  -- counting transactions
+        AVG(Revenue) AS Avg_Transaction -- average amount of sale
+FROM (SELECT ss.Transaction_Date -- renaming and grabbing sales for in store
+		AS Sale_Date,     -- date of sale
+        ss.Sale_Amount
+        AS Revenue,    -- sale amount
+        c.Category
+        AS Category -- category of product
+FROM store_sales AS ss
+JOIN store_locations AS sl
+	ON ss.Store_ID = sl.StoreId -- matching store to location
+JOIN products AS p -- new alias 
+	ON ss.Prod_Num = p.ProdNum -- matching products from two tables
+JOIN inventory_categories AS c -- new alias
+	ON p.Categoryid = c.Categoryid -- pulling names for category
+WHERE sl.State = 'Texas'
+UNION ALL -- stacking in store to online
+SELECT o.Date AS Sale_Date,  -- online sale date
+		o.SalesTotal AS Revenue, -- online amount of sale
+        c.Category AS Category -- category of product
+FROM online_sales AS o
+JOIN products AS p
+	ON o.ProdNum = p.ProdNum -- matching products
+JOIN inventory_categories AS c
+	ON p.Categoryid = c.Categoryid -- pulling names for category
+WHERE o.ShiptoState = 'Texas')
+AS all_sales   -- combining all sales
+GROUP BY YEAR(Sale_Date),
+		MONTH(Sale_Date),
+        Category
+ORDER BY Year,
+		Month,
+        Category;
+/* 288 RECORDS Returned */
+
+/* QUESTION 5: Can you provide a ranking of in-store sales performance by each store in the 
+sales territory, or a ranking of online sales performance by state 
+within an online sales territory? */

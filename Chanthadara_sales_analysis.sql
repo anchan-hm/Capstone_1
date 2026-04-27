@@ -1,5 +1,7 @@
 USE sample_sales; -- using schema
 
+/*=============================================================================================*/
+
 /*QUESTION 1: What is total revenue overall for sales in the assigned territory, 
 plus the start date and end date that tell you what period the data covers?*/
 
@@ -53,7 +55,10 @@ WHERE ShiptoState = 'Texas')
 AS combined; -- combining them into one output
 /* start date: 2022-01-01, end date: 2025-12-31, revenue = 8209129.35 */
 
+/*========================================================================================*/
+
 /* QUESTION 2: What is the month by month revenue breakdown for the sales territory? */
+
 -- creating month by month sales
 SELECT YEAR(Sale_Date) AS Year,  -- making year for sale
 		MONTH(Sale_Date) AS Month,  -- making month for sale
@@ -74,12 +79,17 @@ GROUP BY YEAR(Sale_Date), MONTH(Sale_Date) -- grouping years and months
 ORDER BY Year, Month;    -- sorting from oldest to newest
 /* 130 RECORDS Returned */
 
+/*=====================================================================================*/
+
 /* QUESTION 3: Provide a comparison of total revenue for the specific sales territory
 and the region it belongs to. */
+
 -- region that Texas is in
 SELECT Region  -- column name
 FROM management  -- table
 WHERE State = 'Texas';  -- making sure it's Texas
+/* Region = South */
+
 -- Texas compared to whole region
 SELECT Location,  --  will be either Texas or South
 		SUM(Revenue)  -- revenue of each
@@ -119,8 +129,11 @@ AS combined -- combine into one table
 GROUP BY Location;
 /* Texas = 8209129.35, South = 15641639.89 */
 
+/*===================================================================================*/
+
 /* QUESTION 4: What is the number of transactions per month and average transaction
 size by product category for the sales territory? */
+
 -- finding the average sale amount for Texas
 SELECT YEAR(Sale_Date) AS Year,  -- creating year of sale
 		MONTH (Sale_Date) AS Month,  -- creating month of sale
@@ -159,6 +172,8 @@ ORDER BY Year,
 		Month,
         Category;
 /* 288 RECORDS Returned */
+
+/*==========================================================================================*/
 
 /* QUESTION 5: Can you provide a ranking of in-store sales performance by each store in the 
 sales territory, or a ranking of online sales performance by state 

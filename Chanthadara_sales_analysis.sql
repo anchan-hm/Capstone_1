@@ -7,7 +7,7 @@ plus the start date and end date that tell you what period the data covers?*/
 
 -- specific info of manager for Texas to have quick access
 SELECT State,
-		Region,      -- including all columns from table
+		Region,      -- } including all columns from table
         SalesManager,
         RegionalDirector
 FROM management      -- table that has manager info
@@ -96,7 +96,7 @@ JOIN inventory_categories AS ic -- new alias
 	ON p.Categoryid = ic.Categoryid -- pulling names for category
 WHERE sl.State = 'Texas'
 GROUP BY YEAR(ss.Transaction_Date),
-		MONTH(ss.Transaction_Date),  -- grouping
+		MONTH(ss.Transaction_Date),  -- } grouping
         ic.Category
 ORDER BY Year, Month, Category;  -- clean order
 /* 288 RECORDS Returned */

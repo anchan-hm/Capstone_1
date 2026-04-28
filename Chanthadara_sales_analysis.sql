@@ -178,3 +178,6 @@ ORDER BY Year,
 /* QUESTION 5: Can you provide a ranking of in-store sales performance by each store in the 
 sales territory, or a ranking of online sales performance by state 
 within an online sales territory? */
+
+-- pulling in stores' sales performance
+SELECT s.StoreId,

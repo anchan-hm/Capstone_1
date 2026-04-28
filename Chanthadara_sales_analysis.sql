@@ -123,3 +123,13 @@ ORDER BY Total_revenue DESC;  -- ranking by ordering highest to lowest
 
 /* QUESTION 6: What is your recommendation for where to focus sales attention in the next quarter? */
 
+/* Based on previous questions, I would recommend focusing on Beaumont location, because
+it is ranked first in Texas for revenue. I came to this conclusion because, there was a large gap
+between first and second place (question 5); displaying that the other stores are being greatly 
+outperformed, and that the Beaumont location is doing something right. When comparing Texas to the 
+rest of the South region, Texas' numbers are less than half of the South (question 3). We can also
+look into Technology & Accessories, because they have the highest average of transactions of
+products (question 4) in Texas. Reviewing the yearly/monthly revenue for Texas (question 2), I have
+discovered that throughout the year it is steady and increases each year; allowing an opportunity to
+focus on using methods that work for Beaumont on other stores can potentially help improve revenue 
+for the state. */

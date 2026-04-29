@@ -24,7 +24,7 @@ JOIN store_locations AS sl -- alias
 WHERE sl.State = 'Texas';
 /* start date: 2022-01-01, end date: 2025-12-31, revenue = 3417850.01 */
 
-/*========================================================================================*/
+/*=============================================================================================*/
 
 /* QUESTION 2: What is the month by month revenue breakdown for the sales territory? */
 
@@ -40,7 +40,7 @@ GROUP BY YEAR(ss.Transaction_Date), MONTH(ss.Transaction_Date) -- grouping years
 ORDER BY Year, Month;    -- sorting from oldest to newest
 /* 48 RECORDS Returned */
 
-/*=====================================================================================*/
+/*=============================================================================================*/
 
 /* QUESTION 3: Provide a comparison of total revenue for the specific sales territory
 and the region it belongs to. */
@@ -76,7 +76,7 @@ AS combined
 GROUP BY Location;
 /* Texas = 3417850.01, South = 7996850.12 */
 
-/*===================================================================================*/
+/*=============================================================================================*/
 
 /* QUESTION 4: What is the number of transactions per month and average transaction
 size by product category for the sales territory? */
@@ -101,7 +101,7 @@ GROUP BY YEAR(ss.Transaction_Date),
 ORDER BY Year, Month, Category;  -- clean order
 /* 288 RECORDS Returned */
 
-/*==========================================================================================*/
+/*=============================================================================================*/
 
 /* QUESTION 5: Can you provide a ranking of in-store sales performance by each store in the 
 sales territory, or a ranking of online sales performance by state 
@@ -119,7 +119,7 @@ GROUP BY sl.StoreId, sl.StoreLocation  -- grouping total revenue to their stores
 ORDER BY Total_revenue DESC;  -- ranking by ordering highest to lowest
 /* 11 RECORDS Returned */
 
-/*==============================================================================================*/
+/*=============================================================================================*/
 
 /* QUESTION 6: What is your recommendation for where to focus sales attention in the next quarter? */
 

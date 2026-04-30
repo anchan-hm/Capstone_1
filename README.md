@@ -6,3 +6,6 @@ For this capstone project, I have been assigned to analyze **Texas** sales terri
 
 ---
 # **APPENDIX**
+
+
+I have created a SQL script for bonus questions, using the same dataset. In the script, I have made queries demonstrating the use of subqueries to filter transactions by state, identified stores with above-average revenue, retrieved the top five highest-grossing stores and their locations, and returned all sales records from stores managed by the Northeast region.
